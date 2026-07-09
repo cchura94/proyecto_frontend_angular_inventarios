@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class Login {
 
+  loading= signal<boolean>(false);
+
+  // formulario reactivo
   loginForm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(6)])
@@ -19,19 +22,33 @@ export class Login {
   respuesta_login = signal<any>({})
   router = inject(Router)
 
+  //authService2 = inject(AuthService)
+  // constructor con Inyección de dependencia
   constructor(private authService: AuthService){}
 
   funIngresarConLaravel(){
-    this.authService.funLoginLaravel(this.loginForm.value).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.respuesta_login.set(res)
-        this.router.navigate(["/admin/perfil"])
-      },
-      error: (err: any) => {
-        alert("Error al Ingresar")
-      }
-    })
+    // validar
+    if(this.loginForm.valid){
+      this.loading.set(true);
+      this.authService.funLoginLaravel(this.loginForm.value).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          // almacen el token en localStorage
+          localStorage.setItem("access_token", res.access_token)
+          this.loading.set(false);
+          this.respuesta_login.set(res)
+          this.router.navigate(["/admin/perfil"])
+        },
+        error: (err: any) => {
+          this.loading.set(false);
+          alert("Error al Ingresar")
+        }
+      })
+
+    }else{
+      alert("Verifique los datos antes de ingresar al sistema")
+    }
+
   }
 
 }

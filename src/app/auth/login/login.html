@@ -7,8 +7,12 @@
     <label for="">Ingrese Contraseña</label>
     <input type="password" formControlName="password">
     <br>
-    <button (click)="funIngresarConLaravel()" [disabled]="!loginForm.valid">INGRESAR AL SISTEMA</button>
-
+    
+        <button (click)="funIngresarConLaravel()" [disabled]="!loginForm.valid || loading()">INGRESAR AL SISTEMA</button>
+  
+    @if (loading()) {
+        <h1>Procesando...</h1>
+    }
 </div>
 <hr>
 Bienvenido: {{ respuesta_login().usuario?.name }}

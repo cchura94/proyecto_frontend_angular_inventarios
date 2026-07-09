@@ -16,7 +16,7 @@ export class AuthService {
 
     }
     funPerfil(){
-
+        return this.http.get(`${this.urlBase}/api/v1/auth/profile`, /*{headers: {Authorization: "Bearer "+localStorage.getItem("access_token")}}*/);
     }
     funLogout(){
 
