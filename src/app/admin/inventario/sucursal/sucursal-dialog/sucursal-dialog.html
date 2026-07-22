@@ -1,0 +1,44 @@
+<h2 mat-dialog-title class="dialog-title">Sucursal</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p class="dialog-description">Ingrese los datos correspondientes a la categoría.</p>
+
+  <form class="category-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" placeholder="Ej. Electrónica" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Direccion</mat-label>
+      <textarea 
+        matInput 
+        [(ngModel)]="data.direccion" 
+        name="direccion" 
+        rows="3" 
+        placeholder="ingrese direccion">
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Telefono</mat-label>
+      <input matInput [(ngModel)]="data.telefono" name="telefono" placeholder="Ej. 21343211" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ciudad</mat-label>
+      <input matInput [(ngModel)]="data.ciudad" name="ciudad" placeholder="Ciudad" required />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button 
+    mat-flat-button 
+    color="primary" 
+    [mat-dialog-close]="dataSucursal()" 
+    cdkFocusInitial>
+    Guardar
+  </button>
+</mat-dialog-actions>

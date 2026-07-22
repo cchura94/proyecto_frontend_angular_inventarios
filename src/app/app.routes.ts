@@ -10,6 +10,8 @@ import { Users } from './admin/users/users';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DashComponent } from './admin/dash/dash.component';
 import { Categoria } from './admin/inventario/categoria/categoria';
+import { Sucursal } from './admin/inventario/sucursal/sucursal';
+import { Almacen } from './admin/inventario/almacen/almacen';
 
 export const routes: Routes = [
     {
@@ -32,6 +34,14 @@ export const routes: Routes = [
             {
                 path: 'categoria',
                 component: Categoria
+            },
+            {
+                path: 'sucursal',
+                component: Sucursal
+            },
+            {
+                path: 'almacen',
+                component: Almacen
             }
         ]
     },
