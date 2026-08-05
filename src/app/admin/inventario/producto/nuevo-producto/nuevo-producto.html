@@ -1,3 +1,52 @@
-<h1>Nuevo Producto</h1>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title>
+            Registrar Producto
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre de Producto">
+                    @if (productoForm.get('nombre')?.hasError('required')) {
+                        <mat-error>
+                            El Nombre es Obligatorio
+                        </mat-error>
+                    }
+                </mat-form-field>
+
+                 <mat-form-field appearance="outline">
+                    <mat-label>Categoría</mat-label>
+                    <mat-select formControlName="categoriaId">
+                        @for (cat of categorias(); track $index) {
+                            <mat-option [value]="cat.id">{{cat.nombre}} </mat-option>
+                        }
+                    </mat-select>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput formControlName="descripcion" placeholder="descripción"></textarea>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Precio de Venta</mat-label>
+                    <input matInput type="number" step="0.01" formControlName="precio_venta_actual">
+                </mat-form-field>
+
+            </div>
+
+            <div class="acciones">
+                <button mat-raised-button color="primary" type="submit" >Guardar Cambios</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>
 
 <button mat-button routerLink="/admin/producto">Volver</button>
