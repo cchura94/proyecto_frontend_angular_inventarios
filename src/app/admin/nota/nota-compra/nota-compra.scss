@@ -1,0 +1,64 @@
+.compra-container{
+    display: grid;
+    margin: 16px;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: 20px;
+}
+
+.w-100{
+    width: 100%;
+}
+
+mat-card{
+    border-radius:16px
+}
+
+mat-card-title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@media(max-width:1100px){
+    .compra-container{
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.header-row{
+    display: grid;
+    grid-template-columns: 1fr 70px 110px;
+    padding: 10px 0;
+    font-weight: 600;
+    border-bottom: 2px solid #eee;
+    color: 666;
+}
+.row{
+    display: grid;
+    grid-template-columns: 1fr 70px 110px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.producto{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cantidad{
+    text-align: center;
+}
+.precio{
+    text-align: right;
+    font-weight: 500;
+}

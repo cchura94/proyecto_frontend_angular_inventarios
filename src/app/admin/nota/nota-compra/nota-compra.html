@@ -1,0 +1,144 @@
+<div class="compra-container">
+    <div class="productos-section">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Productos
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Buscar Producto</mat-label>
+                    <input matInput [(ngModel)]="buscar" (change)="funListaProductos()">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="lista_productos()" matSort>
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>id.</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef>Nombre.</th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef>Precio</th>
+                    <td mat-cell *matCellDef="let element">{{ element.precio_venta_actual }}</td>
+                </ng-container>
+                <ng-container matColumnDef="almacenes">
+                    <th mat-header-cell *matHeaderCellDef>Stock por almacen</th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                        @if (element.almacenes.length){
+                            @for (item of element.almacenes; track $index) {
+                                <div>
+                                    <strong>{{ item.almacen.nombre }}</strong>
+                                    {{ item.cantidad_actual }}
+                                </div>
+
+                            }
+                        }
+                        
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="imagen">
+                    <th mat-header-cell *matHeaderCellDef>imagen</th>
+                    <td mat-cell *matCellDef="let element">
+                        <img [src]="`${urlBase}/${element.imagen}`" alt="" width="100px">
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-flat-button color="primary" (click)="funAddCarrito(element)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator [length]="total()" [pageSizeOptions]="[5, 10, 25, 50]" [pageSize]="5" showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
+          
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+    <div class="sidebar">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Carrito
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+                <div class="header-row">
+                    <div>Producto</div>
+                    <div>Cant.</div>
+                    <div>Precio</div>
+                </div>
+                @for (item of lista_carrito(); track $index) {
+                    <div class="row">
+                        <div class="producto">
+                            {{ item.nombre }}
+                        </div>
+                        <div class="cantidad">
+                            {{item.cantidad}}
+                        </div>
+                        <div class="precio">
+                            {{item.precio}}
+                        </div>
+                    </div>
+                }
+                
+                
+            </mat-card-content>
+
+        </mat-card>
+
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Almacén
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+               
+            </mat-card-content>
+
+        </mat-card>
+
+         <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Proveedor
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+               
+            </mat-card-content>
+
+        </mat-card>
+
+         <mat-card appearance="outlined">
+            <mat-card-content>
+               <button mat-flat-button color="primary">Registrar Compra</button>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>
